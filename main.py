@@ -22,20 +22,29 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith('!test'):
-        counter = 0
-        tmp = await client.send_message(message.channel, 'Calculating messages...')
-        async for log in client.logs_from(message.channel, limit=100):
-            if log.author == message.author:
-                counter += 1
+    if message.content.startswith('!'):
+        args = message.content.split(' ')
 
-        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
+        if args[0] == '!ping':
+            await client.send_message(message.channel, 'Pong!')
 
-    elif message.content.startswith('!sleep'):
-        await asyncio.sleep(5)
-        await client.send_message(message.channel, 'Done sleeping')
-    elif message.content.startswith('!i'):
-        pic = imgur.get()
-        await client.send_message(message.channel, pic)
+        elif args[0] == '!i':
+            pic = imgur.get()
+            await client.send_message(message.channel, pic)
+
+        elif args[0] == '!clear':
+            if len(args) == 1:
+                await client.purge_from(message.channel, limit=3)
+            else:
+                try:
+                    await client.purge_from(message.channel, limit=int(args[1]))
+                except ValueError:
+                    await client.send_message(message.channel, 'Second argument must be an integer... :zzz:')
+
+        elif args[0] == '!help':
+            await client.send_message(message.channel, """```Current commands:\n
+                                                            !ping - Test to see if the bot is working\n
+                                                            !i - Shows a random imgur link, warning: NSFW\n
+                                                            !clear *count - clears the last <count> messages, default: 3```""")
 
 client.run(token)
