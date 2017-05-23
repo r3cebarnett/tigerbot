@@ -47,4 +47,7 @@ async def on_message(message):
                                                             !i - Shows a random imgur link, warning: NSFW\n
                                                             !clear *count - clears the last <count> messages, default: 3```""")
 
+        elif args[0] == '!triggered':
+            await client.send_file(message.channel, triggered(5))
+
 client.run(token)
