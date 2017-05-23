@@ -2,6 +2,7 @@ import discord
 import asyncio
 import configparser
 from Imgur import Imgur
+from triggered import *
 
 config = configparser.ConfigParser()
 config.read('config.cfg')
@@ -48,6 +49,7 @@ async def on_message(message):
                                                             !clear *count - clears the last <count> messages, default: 3```""")
 
         elif args[0] == '!triggered':
-            await client.send_file(message.channel, triggered(5))
+            with open(triggered(14), 'rb') as f:
+                await client.send_file(message.channel, f)
 
 client.run(token)

@@ -1,5 +1,6 @@
 import random
+import glob
 
 def triggered(pics):
     selection = random.randint(1,pics)
-    return "/triggered/" + str(selection) + "g.*"
+    return glob.glob('triggered/' + str(selection) + 'g.*')[0]
