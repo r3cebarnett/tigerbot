@@ -49,7 +49,7 @@ async def on_message(message):
                                                             !clear *count - clears the last <count> messages, default: 3```""")
 
         elif args[0] == '!triggered':
-            with open(triggered(14), 'rb') as f:
+            with open(triggered(21), 'rb') as f:
                 await client.send_file(message.channel, f)
 
 client.run(token)
