@@ -35,13 +35,11 @@ async def on_message(message):
             await client.send_message(message.channel, pic)
 
         elif args[0] == '!clear':
-            if len(args) == 1:
-                await client.purge_from(message.channel, limit=3)
-            else:
-                try:
-                    await client.purge_from(message.channel, limit=int(args[1]))
-                except ValueError:
-                    await client.send_message(message.channel, 'Second argument must be an integer... :zzz:')
+            valid = []
+            async for check in client.logs_from(message.channel, limit=100):
+                if check.author == client.user:
+                    await client.delete_message(check)
+                    break
 
         elif args[0] == '!help':
             await client.send_message(message.channel,
@@ -62,5 +60,12 @@ async def on_message(message):
                 await client.send_message(message.channel, "Gotta have more arguments, bud. :zzz:")
             else:
                 await client.send_message(message.channel, args[random.randint(2,len(args))-1])
+
+        elif args[0] == '!flip':
+            choice = random.randint(1,2)
+            if choice == 1:
+                await client.send_file(message.channel, 'flip/heads.png')
+            else:
+                await client.send_file(message.channel, 'flip/tails.png')
 
 client.run(token)
