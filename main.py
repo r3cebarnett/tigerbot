@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import configparser
+import random
 from Imgur import Imgur
 from triggered import *
 
@@ -46,10 +47,18 @@ async def on_message(message):
             await client.send_message(message.channel, """```Current commands:\n
                                                             !ping - Test to see if the bot is working\n
                                                             !i - Shows a random imgur link, warning: NSFW\n
-                                                            !clear *count - clears the last <count> messages, default: 3```""")
+                                                            !clear *count - clears the last <count> messages, default: 3
+                                                            !triggered - shows a random triggered image\n
+                                                            !pick choice1 choice2 choice3 choicen - picks a random choice from the ones given```""")
 
         elif args[0] == '!triggered':
             with open(triggered(21), 'rb') as f:
                 await client.send_file(message.channel, f)
+
+        elif args[0] == '!pick':
+            if len(args) == 1:
+                await client.send_message(message.channel, "Gotta have more arguments, bud. :zzz")
+            else:
+                await client.send_message(message.channel, args[random.randint(2,len(args))-1])
 
 client.run(token)
