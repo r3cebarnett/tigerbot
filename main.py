@@ -44,12 +44,14 @@ async def on_message(message):
                     await client.send_message(message.channel, 'Second argument must be an integer... :zzz:')
 
         elif args[0] == '!help':
-            await client.send_message(message.channel, """```Current commands:\n
-                                                            !ping - Test to see if the bot is working\n
-                                                            !i - Shows a random imgur link, warning: NSFW\n
-                                                            !clear *count - clears the last <count> messages, default: 3
-                                                            !triggered - shows a random triggered image\n
-                                                            !pick choice1 choice2 choice3 choicen - picks a random choice from the ones given```""")
+            await client.send_message(message.channel,
+            """
+```Current commands:\n
+!ping - Test to see if the bot is working
+!i - Shows a random imgur link, warning: NSFW
+!clear *count - clears the last <count> messages, default: 3
+!triggered - shows a random triggered image
+!pick choice1 choice2 choice3 choicen - picks a random choice from the ones given```""")
 
         elif args[0] == '!triggered':
             with open(triggered(21), 'rb') as f:
@@ -57,7 +59,7 @@ async def on_message(message):
 
         elif args[0] == '!pick':
             if len(args) == 1:
-                await client.send_message(message.channel, "Gotta have more arguments, bud. :zzz")
+                await client.send_message(message.channel, "Gotta have more arguments, bud. :zzz:")
             else:
                 await client.send_message(message.channel, args[random.randint(2,len(args))-1])
 
