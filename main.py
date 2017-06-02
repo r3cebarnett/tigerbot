@@ -2,6 +2,7 @@ import discord
 import asyncio
 import configparser
 import random
+import time
 from Imgur import Imgur
 from triggered import *
 
@@ -68,4 +69,7 @@ async def on_message(message):
             else:
                 await client.send_file(message.channel, 'flip/tails.png')
 
-client.run(token)
+try:
+    client.run(token)
+except ConnectionResetError as e:
+    client.logout()
