@@ -32,8 +32,11 @@ async def on_message(message):
             await client.send_message(message.channel, 'Pong!')
 
         elif args[0] == '!i':
-            pic = imgur.get()
-            await client.send_message(message.channel, pic)
+            if message.channel.name == 'imgur':
+                pic = imgur.get()
+                await client.send_message(message.channel, pic)
+            else:
+                await client.send_message(message.channel, 'Use #imgur please.')
 
         elif args[0] == '!clear':
             valid = []
