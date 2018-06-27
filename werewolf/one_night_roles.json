@@ -1,0 +1,24 @@
+[
+  {
+    "roleName": "Vanilla Town",
+    "roleAbbv": "vt",
+    "affiliation": "town",
+    "roleMessage": "You are a vanilla town member.
+    You have no abilities other than your voice and your vote.
+    You win if a wolf is killed by the end of the night."
+  },
+  {
+    "roleName": "Vanilla Werewolf",
+    "roleAbbv": "vw",
+    "affiliation": "wolf",
+    "roleMessage": "You are a werewolf.
+    You have no abilities other than your voice and your vote.
+    You win if a vanilla town or a minion is killed by the end of the night."
+  },
+  {
+    "roleName": "",
+    "roleAbbv": "",
+    "affiliation": "",
+    "roleMessage": ""
+  }
+]
