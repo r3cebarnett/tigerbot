@@ -13,4 +13,4 @@ Currently I am working on:
 - Python 3.6
 - discord.py (pip install discord)
 - Requests (pip install requests)
-- MediaWiki (pip install pymediawiki) [only for Hearthstone so not needed yet]
+- Wikia (pip install wikia) [only for Hearthstone so not needed yet]
