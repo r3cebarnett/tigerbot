@@ -3,47 +3,52 @@ import json
 import configparser
 import random
 
-"""
-{
-'name': 'Booty Bay Bodyguard',
-'cardSet': 'Basic',
-'type': 'Minion',
-'rarity': 'Free',
-'cost': 5,
-'attack': 5,
-'health': 4,
-'text': '<b>Taunt</b>',
-'flavor': 'You can hire him... until someone offers him enough gold to turn on you.',
-'playerClass': 'Neutral',
-only at end 'img': 'http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_187.png',
-'mechanics': [{'name': 'Taunt'}]}
-CONDITIONAL RACE for TRIBE
-"""
+class Hearthstone:
+    def __init__(self):
+        config = configparser.ConfigParser()
+        config.read('config.cfg')
+        self.card = None
+        self.still_looking = False
 
-config = configparser.ConfigParser()
-config.read('config.cfg')
+        self.response = requests.get("https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1",
+          headers={
+            "X-Mashape-Key": config.get('hearthstone', 'api')
+          }
+        )
 
-response = requests.get("https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1",
-  headers={
-    "X-Mashape-Key": config.get('hearthstone', 'api')
-  }
-)
+        self.data = json.loads(self.response.text)
+        self.keys = list(self.data.keys())
 
-data = json.loads(response.text) # Note that this is a dict now
-keys = list(data.keys())
+        for i in range(len(self.keys)):
+            if len(self.data[self.keys[i]]) == 0 or self.keys[i] == 'Hero Skins':
+                self.data.pop(self.keys[i], None)
 
-for i in range(len(keys)):
-    if len(data[keys[i]]) == 0 or keys[i] == 'Hero Skins':
-        data.pop(keys[i], None)
+        self.keys = list(self.data.keys())
 
-keys = list(data.keys())
+    def guess_print(self):
+        str = ""
+        str += "This card is a {} {} that is {}.\n".format(self.card['cardSet'],
+                                                            self.card['type'],
+                                                            self.card['rarity'])
 
-""" At this point we have all cards that can be called now """
+        if self.card['type'] is not 'Spell':
+            str += "It is a {} mana {}/{}.\n".format(self.card['cost'],
+                                                    self.card['health'],
+                                                    self.card['attack'])
+        else:
+            str += "It costs {} mana.\n".format(self.card['cost'])
 
-cardClass = random.choice(keys)
-cards = data[cardClass]
-card = random.choice(cards)
+        str += "\"{}\"\n".format(self.card['flavor'])
+        if 'race' in list(self.card.keys()):
+            str += "Tribe: {}\n".format(self.card['race'])
 
-print(card)
+        return str
 
-""" Now we have a specified card """
+    def get_image(self):
+        return self.card['img']
+
+    def get_rand(self):
+        cardClass = random.choice(self.keys)
+        cards = self.data[cardClass]
+        self.card = random.choice(cards)
+        self.still_looking = True
