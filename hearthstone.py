@@ -27,16 +27,17 @@ class Hearthstone:
 
     def guess_print(self):
         str = ""
-        str += "This card is a {} {} that is {}.\n".format(self.card['cardSet'],
-                                                            self.card['type'],
-                                                            self.card['rarity'])
+        str += "This card is a {} {} {}.\n".format(self.card['rarity'],
+                                                    self.card['cardSet'],
+                                                    self.card['type'])
 
         if self.card['type'] is not 'Spell':
             str += "It is a {} mana {}/{}.\n".format(self.card['cost'],
                                                     self.card['health'],
                                                     self.card['attack'])
         else:
-            str += "It costs {} mana.\n".format(self.card['cost'])
+            str += "It costs {} mana.\n{}\n".format(self.card['cost'],
+                                                    self.card['text'])
 
         str += "\"{}\"\n".format(self.card['flavor'])
         if 'race' in list(self.card.keys()):
