@@ -1,165 +1,116 @@
-[
-  {
-    "roleName": "Villager",
-    "roleAbbv": "v",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You have no abilities other than your voice and your vote.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Vanilla Werewolf",
-    "roleAbbv": "w",
-    "affiliation": "wolf",
-    "roleMessage": "You are a werewolf.
-    You have no abilities other than your voice and your vote.
-    You get to see who the other werewolves are.
-    You win if either a minion is killed or no werewolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Vanilla Tanner",
-    "roleAbbv": "t",
-    "affiliation": "tanner",
-    "roleMessage": "You are a tanner.
-    You have no abilities other than your voice and your vote.
-    You win if you are killed by the end of the day."
-  },
-  {
-    "roleName": "Mason",
-    "roleAbbv": "ma",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You have no abilities other than your voice and your vote.
-    You get to see who the other masons are.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Robber",
-    "roleAbbv": "ro",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You MAY switch your role with another player's, and then view your new role.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Troublemaker",
-    "roleAbbv": "tr",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You MAY switch any two other player's roles.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Seer",
-    "roleAbbv": "se",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You MAY look at one other player's card, or two of the center cards.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Apprentice Seer",
-    "roleAbbv": "as",
-    "affilitation": "town",
-    "roleMessage": "You are a town member.
-    You MAY look at one center card.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Witch",
-    "roleAbbv": "wi",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You MAY look at one center card.
-    If you do, you must give that card to any player.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Paranormal Investigator",
-    "roleAbbv": "pi",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You MAY look at up to two other player's cards.
-    However, if you see a role that is NOT on the villager team,
-    you become that role, and you may not look at any more cards.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Drunk",
-    "roleAbbv": "dr",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You MUST switch your card with any center card.
-    You cannot view your new role.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Village Idiot",
-    "roleAbbv": "vi",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You MUST every other player's card to the left or right.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Insomniac",
-    "roleAbbv": "is",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You MUST look at your own card.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Revealer",
-    "roleAbbv": "re",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You MAY flip over another player's card for all player's to see.
-    If you reveal a non-villager role, it will be flipped back over.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Aura Seer",
-    "roleAbbv": "au",
-    "affiliation": "town",
-    "roleMessage": "You are a town member.
-    You detect any player that has touched a card at a point in the night phase.
-    You win if a wolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Alpha Wolf",
-    "roleAbbv": "aw",
-    "affiliation": "wolf",
-    "roleMessage": "You are a werewolf.
-    You get to see who the other werewolves are.
-    You MUST bite another player and turn them into a werewolf using a center wolf card.
-    You win if either a minion is killed or no werewolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Mystic Wolf",
-    "roleAbbv": "mw",
-    "affiliation": "wolf",
-    "roleMessage": "You are a werewolf.
-    You get to see who the other werewolves are.
-    You MAY look at a another player's card.
-    You win if either a minion is killed or no werewolf is killed by the end of the day."
-  },
-  {
-    "roleName": "Dream Wolf",
-    "roleAbbv": "dw",
-    "affiliation": "wolf",
-    "roleMessage": "You are a werewolf.
-    You DO NOT get to see who the other werewolves are.
-    They do get to see that you are a werewolf.
-    You win if either a minion is killed or no werewolf is killed by the end of the day."
-  },
-  {
-   "roleName": "Minion",
-    "roleAbbv": "mi",
-    "affiliation": "wolf",
-    "roleMessage": "You are a werewolf.
-    You get to see who all the werewolves are.
-    However, they do not get to see who you are.
-    You win if either you are killed or no werewolves are killed by the end of the day."
-  }
-]
+{
+	"villager": {
+		"roleName": "Villager",
+		"roleAbbv": "v",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou have no abilities other than your voice and your vote.\nYou win if a wolf is killed by the end of the day."
+	},
+	"werewolf": {
+		"roleName": "Vanilla Werewolf",
+		"roleAbbv": "w",
+		"affiliation": "wolf",
+		"roleMessage": "You are a werewolf.\nYou have no abilities other than your voice and your vote.\nYou get to see who the other werewolves are.\nYou win if either a minion is killed or no werewolf is killed by the end of the day."
+	},
+	"tanner": {
+		"roleName": "Vanilla Tanner",
+		"roleAbbv": "t",
+		"affiliation": "tanner",
+		"roleMessage": "You are a tanner.\nYou have no abilities other than your voice and your vote.\nYou win if you are killed by the end of the day."
+	},
+	"mason": {
+		"roleName": "Mason",
+		"roleAbbv": "ma",
+		"affiliation": "town",
+		"roleMessage": "You are a masonic town member.\nYou have no abilities other than your voice and your vote.\nYou get to see who the other masons are.\nYou win if a wolf is killed by the end of the day."
+	},
+	"robber": {
+		"roleName": "Robber",
+		"roleAbbv": "ro",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou MAY switch your role with another player's, and then view your new role.\nYou win if a wolf is killed by the end of the day."
+	},
+	"troublemaker": {
+		"roleName": "Troublemaker",
+		"roleAbbv": "tr",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou MAY switch any two other player's roles.\nYou win if a wolf is killed by the end of the day."
+	},
+	"seer": {
+		"roleName": "Seer",
+		"roleAbbv": "se",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou MAY look at one other player's card, or two of the center cards.\nYou win if a wolf is killed by the end of the day."
+	},
+	"appr_seer": {
+		"roleName": "Apprentice Seer",
+		"roleAbbv": "as",
+		"affilitation": "town",
+		"roleMessage": "You are a town member.\nYou MAY look at one center card.\nYou win if a wolf is killed by the end of the day."
+	},
+	"witch": {
+		"roleName": "Witch",
+		"roleAbbv": "wi",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou MAY look at one center card.\nIf you do, you must give that card to any player.\nYou win if a wolf is killed by the end of the day."
+	},
+	"para_inv": {
+		"roleName": "Paranormal Investigator",
+		"roleAbbv": "pi",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou MAY look at up to two other player's cards.\nHowever, if you see a role that is NOT on the villager team,\nyou become that role, and you may not look at any more cards.\nYou win if a wolf is killed by the end of the day."
+	},
+	"drunk": {
+		"roleName": "Drunk",
+		"roleAbbv": "dr",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou MUST switch your card with any center card.\nYou cannot view your new role.\nYou win if a wolf is killed by the end of the day."
+	},
+	"vill_idiot": {
+		"roleName": "Village Idiot",
+		"roleAbbv": "vi",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou MUST every other player's card to the left or right.\nYou win if a wolf is killed by the end of the day."
+	},
+	"insomniac": {
+		"roleName": "Insomniac",
+		"roleAbbv": "is",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou MUST look at your own card.\nYou win if a wolf is killed by the end of the day."
+	},
+	"revealer": {
+		"roleName": "Revealer",
+		"roleAbbv": "re",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou MAY flip over another player's card for all player's to see.\nIf you reveal a non-villager role, it will be flipped back over.\nYou win if a wolf is killed by the end of the day."
+	},
+	"aura_seer": {
+		"roleName": "Aura Seer",
+		"roleAbbv": "au",
+		"affiliation": "town",
+		"roleMessage": "You are a town member.\nYou detect any player that has touched a card at a point in the night phase.\nYou win if a wolf is killed by the end of the day."
+	},
+	"alpha_wolf": {
+		"roleName": "Alpha Wolf",
+		"roleAbbv": "aw",
+		"affiliation": "wolf",
+		"roleMessage": "You are a werewolf.\nYou get to see who the other werewolves are.\nYou MUST bite another player and turn them into a werewolf using a center wolf card.\nYou win if either a minion is killed or no werewolf is killed by the end of the day."
+	},
+	"mystic_wolf": {
+		"roleName": "Mystic Wolf",
+		"roleAbbv": "mw",
+		"affiliation": "wolf",
+		"roleMessage": "You are a werewolf.\nYou get to see who the other werewolves are.\nYou MAY look at a another player's card.\nYou win if either a minion is killed or no werewolf is killed by the end of the day."
+	},
+	"dream_wolf": {
+		"roleName": "Dream Wolf",
+		"roleAbbv": "dw",
+		"affiliation": "wolf",
+		"roleMessage": "You are a werewolf.\nYou DO NOT get to see who the other werewolves are\nThey do get to see that you are a werewolf.\nYou win if either a minion is killed or no werewolf is killed by the end of the day."
+	},
+	"minion": {
+		"roleName": "Minion",
+		"roleAbbv": "mi",
+		"affiliation": "wolf",
+		"roleMessage": "You are a werewolf.\nYou get to see who all the werewolves are.\nHowever, they do not get to see who you are.\nYou win if either you are killed or no werewolves are killed by the end of the day."
+	}
+}

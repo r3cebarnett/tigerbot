@@ -1,0 +1,17 @@
+{
+	"<putSetupNameHere>": {
+		"roleList": {
+			"<name of role>": "quantity without the quotes",
+			"<name of role 2>": "quantity without the quotes 2, etc you get the point"
+		},
+		"peopleReq": "number of people needed without the quotes"
+	},
+
+	"setup example": {
+		"roleList": {
+			"villager": 2,
+			"werewolf": 1
+		},
+		"peopleReq": 3
+	}
+}
