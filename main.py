@@ -3,6 +3,7 @@ import asyncio
 import configparser
 
 from Imgur import Imgur
+from hearthstone import Hearthstone
 from discord.ext.commands import Bot
 from os import listdir
 from os.path import isfile, join
@@ -18,6 +19,7 @@ FLIP_PATH = config.get('pictures', 'flip')
 client = Bot(command_prefix=BOT_PREFIX, pm_help=True)
 
 IMGUR = Imgur()
+HS = Hearthstone()
 random.seed()
 
 trig_files = [f for f in listdir(TRIG_PATH) if isfile(join(TRIG_PATH, f))]
@@ -76,6 +78,29 @@ async def pick(context, args):
 async def flip(context):
     choice = random.choice(['heads.png', 'tails.png'])
     await client.send_file(context.message.channel, FLIP_PATH + choice)
+
+@client.command(name='hsget',
+                description="Get a hearthstone card to guess",
+                brief="Guess the card!",
+                pass_context=True)
+async def hs_get(context):
+    if HS.still_looking:
+        await client.say(HS.guess_print())
+    else:
+        HS.get_rand()
+        await client.say(HS.guess_print())
+
+@client.command(name='hsguess',
+                description="Guess the current HS trivia card",
+                brief="Make a guess!",
+                pass_context=True)
+async def hs_guess(context, *args):
+    guess = ' '.join(args)
+    if HS.check_guess(guess):
+        await client.say(f"Congratulations, {context.message.author.mention}!")
+        await client.say(HS.get_image())
+    else:
+        await client.say(f"Incorrect guess: {guess}, {context.message.author.mention}")
 
 try:
     client.run(TOKEN)

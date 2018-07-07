@@ -33,8 +33,8 @@ class Hearthstone:
 
         if self.card['type'] is not 'Spell':
             str += "It is a {} mana {}/{}.\n".format(self.card['cost'],
-                                                    self.card['health'],
-                                                    self.card['attack'])
+                                                    self.card['attack'],
+                                                    self.card['health'])
         else:
             str += "It costs {} mana.\n{}\n".format(self.card['cost'],
                                                     self.card['text'])
@@ -53,3 +53,10 @@ class Hearthstone:
         cards = self.data[cardClass]
         self.card = random.choice(cards)
         self.still_looking = True
+
+    def check_guess(self, guess):
+        print(guess, ' | ', self.card['name'])
+        if self.card['name'].lower() == guess.lower():
+            self.still_looking = False
+            return True
+        return False
