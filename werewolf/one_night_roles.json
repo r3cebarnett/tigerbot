@@ -1,7 +1,7 @@
 [
   {
     "roleName": "Villager",
-    "roleAbbv": "vt",
+    "roleAbbv": "v",
     "affiliation": "town",
     "roleMessage": "You are a town member.
     You have no abilities other than your voice and your vote.
@@ -9,7 +9,7 @@
   },
   {
     "roleName": "Vanilla Werewolf",
-    "roleAbbv": "vw",
+    "roleAbbv": "w",
     "affiliation": "wolf",
     "roleMessage": "You are a werewolf.
     You have no abilities other than your voice and your vote.
@@ -18,7 +18,7 @@
   },
   {
     "roleName": "Vanilla Tanner",
-    "roleAbbv": "vt",
+    "roleAbbv": "t",
     "affiliation": "tanner",
     "roleMessage": "You are a tanner.
     You have no abilities other than your voice and your vote.

@@ -10,7 +10,7 @@ class Imgur:
         self._base_url = 'https://i.imgur.com/{}.png'
         self._removed_url = 'https://i.imgur.com/removed.png'
 
-    def get(self):
+    async def get(self):
         while True:
             image_id = ''.join(random.choice(self._valid_characters) for _ in range(self.id_length))
             image_url = self._base_url.format(image_id)
