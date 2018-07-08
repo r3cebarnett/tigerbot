@@ -79,28 +79,37 @@ async def flip(context):
     choice = random.choice(['heads.png', 'tails.png'])
     await client.send_file(context.message.channel, FLIP_PATH + choice)
 
-@client.command(name='hsget',
+@client.command(name='card',
                 description="Get a hearthstone card to guess",
                 brief="Guess the card!",
+                aliases=['c'],
                 pass_context=True)
 async def hs_get(context):
+    if context.message.channel.name is not "hs-game":
+        return
     if HS.still_looking:
         await client.say(HS.guess_print())
     else:
         HS.get_rand()
         await client.say(HS.guess_print())
 
-@client.command(name='hsguess',
+@client.command(name='guess',
                 description="Guess the current HS trivia card",
                 brief="Make a guess!",
+                aliases=['g'],
                 pass_context=True)
 async def hs_guess(context, *args):
-    guess = ' '.join(args)
-    if HS.check_guess(guess):
-        await client.say(f"Congratulations, {context.message.author.mention}!")
-        await client.say(HS.get_image())
+    if context.message.channel.name is not "hs-game":
+        return
+    if HS.still_looking:
+        guess = ' '.join(args)
+        if HS.check_guess(guess):
+            await client.say(f"Congratulations, {context.message.author.mention}!")
+            await client.say(HS.get_image())
+        else:
+            await client.say(f"Incorrect guess: {guess}, {context.message.author.mention}")
     else:
-        await client.say(f"Incorrect guess: {guess}, {context.message.author.mention}")
+        await client.say(f"Sorry, {context.message.author.mention}, there isn't a current card out. Try !card or !c to guess a new card!")
 
 try:
     client.run(TOKEN)

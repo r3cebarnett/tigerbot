@@ -31,7 +31,7 @@ class Hearthstone:
                                                     self.card['cardSet'],
                                                     self.card['type'])
 
-        if self.card['type'] is not 'Spell':
+        if self.card['type'] == 'Minion':
             str += "It is a {} mana {}/{}.\n".format(self.card['cost'],
                                                     self.card['attack'],
                                                     self.card['health'])
