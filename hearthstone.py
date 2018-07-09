@@ -31,7 +31,7 @@ class Hearthstone:
                                                     self.card['cardSet'],
                                                     self.card['type'])
 
-        if self.card['type'] == 'Minion' or self.card['type'] == 'Weapon':
+        if self.card['type'] == 'Minion':
             str += "It is a {} mana {}/{}.\n".format(self.card['cost'],
                                                     self.card['attack'],
                                                     self.card['health'])
@@ -52,13 +52,14 @@ class Hearthstone:
         return self.card['img']
 
     def get_rand(self):
-        cardClass = random.choice(self.keys)
-        cards = self.data[cardClass]
-        self.card = random.choice(cards)
-        self.still_looking = True
+        while(self.still_looking == False):
+            cardClass = random.choice(self.keys)
+            cards = self.data[cardClass]
+            self.card = random.choice(cards)
+            if(self.card['type'] == 'Minion' or self.card['type'] == 'Spell' or self.card['type'] == 'Hero'):
+                self.still_looking = True
 
     def check_guess(self, guess):
-        print(guess, ' | ', self.card['name'])
         if self.card['name'].lower() == guess.lower():
             self.still_looking = False
             return True
