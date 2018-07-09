@@ -31,15 +31,18 @@ class Hearthstone:
                                                     self.card['cardSet'],
                                                     self.card['type'])
 
-        if self.card['type'] == 'Minion':
+        if self.card['type'] == 'Minion' or self.card['type'] == 'Weapon':
             str += "It is a {} mana {}/{}.\n".format(self.card['cost'],
                                                     self.card['attack'],
                                                     self.card['health'])
-        else:
+        elif self.card['type'] == 'Hero':
+            str += f"Its class is {self.card['class']}"
+        elif self.card['type'] == 'Spell':
             str += "It costs {} mana.\n{}\n".format(self.card['cost'],
                                                     self.card['text'])
 
-        str += "\"{}\"\n".format(self.card['flavor'])
+        if 'flavor' in list(self.card.keys()):
+            str += "\"{}\"\n".format(self.card['flavor'])
         if 'race' in list(self.card.keys()):
             str += "Tribe: {}\n".format(self.card['race'])
 

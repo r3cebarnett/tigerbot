@@ -85,7 +85,7 @@ async def flip(context):
                 aliases=['c'],
                 pass_context=True)
 async def hs_get(context):
-    if context.message.channel.name is not "hs-game":
+    if context.message.channel.name != 'hs-game':
         return
     if HS.still_looking:
         await client.say(HS.guess_print())
@@ -99,7 +99,7 @@ async def hs_get(context):
                 aliases=['g'],
                 pass_context=True)
 async def hs_guess(context, *args):
-    if context.message.channel.name is not "hs-game":
+    if context.message.channel.name != 'hs-game':
         return
     if HS.still_looking:
         guess = ' '.join(args)
