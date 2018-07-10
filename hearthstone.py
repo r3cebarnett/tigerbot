@@ -5,6 +5,7 @@ import random
 
 class Hearthstone:
     def __init__(self):
+        random.seed()
         config = configparser.ConfigParser()
         config.read('config.cfg')
         self.card = None
