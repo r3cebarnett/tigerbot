@@ -111,6 +111,34 @@ async def hs_guess(context, *args):
     else:
         await client.say(f"Sorry, {context.message.author.mention}, there isn't a current card out. Try !card or !c to guess a new card!")
 
+@client.command(name='8ball',
+                description="Magic 8 ball",
+                brief="Magic 8 ball",
+                aliases=['8','8b'],
+                pass_context=True)
+async def eight_ball(context):
+    answers = ["As I see it, yes",
+                "Ask again later",
+                "Better not tell you now",
+                "Cannot predict now",
+                "Concentrate and ask again",
+                "Don’t count on it",
+                "It is certain",
+                "It is decidedly so",
+                "Most likely",
+                "My reply is no",
+                "My sources say no",
+                "Outlook good",
+                "Outlook not so good",
+                "Reply hazy try again",
+                "Signs point to yes",
+                "Very doubtful",
+                "Without a doubt",
+                "Yes",
+                "Yes, definitely",
+                "You may rely on it"]
+
+    await client.say(f"{random.choice(answers)}, {context.message.author.mention}")
 try:
     client.run(TOKEN)
 except ConnectionResetError as e:

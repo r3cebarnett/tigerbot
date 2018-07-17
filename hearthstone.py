@@ -27,6 +27,7 @@ class Hearthstone:
         self.keys = list(self.data.keys())
 
     def guess_print(self):
+        print(self.card['name'])
         str = ""
         str += "This card is a {} {} {}.\n".format(self.card['rarity'],
                                                     self.card['cardSet'],
@@ -36,8 +37,8 @@ class Hearthstone:
             str += "It is a {} mana {}/{}.\n".format(self.card['cost'],
                                                     self.card['attack'],
                                                     self.card['health'])
-        elif self.card['type'] == 'Hero':
-            str += f"Its class is {self.card['class']}"
+        elif self.card['type'] == 'Hero' and "class" in self.keys():
+            str += f"Its class is {self.card['class']}\n"
         elif self.card['type'] == 'Spell':
             str += "It costs {} mana.\n{}\n".format(self.card['cost'],
                                                     self.card['text'])
