@@ -104,8 +104,7 @@ async def hs_guess(context, *args):
     if HS.still_looking:
         guess = ' '.join(args)
         if HS.check_guess(guess):
-            await client.say(f"Congratulations, {context.message.author.mention}!")
-            await client.say(HS.get_image())
+            await client.say(f"Congratulations, {context.message.author.mention}!\n{HS.get_image()}")
             HS.get_rand()
             await client.say(HS.guess_print())
         else:
