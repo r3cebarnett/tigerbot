@@ -1,6 +1,7 @@
 import random
 import asyncio
 import configparser
+import pokebase as pb
 
 from Imgur import Imgur
 from hearthstone import Hearthstone
@@ -140,6 +141,21 @@ async def eight_ball(context):
                 "You may rely on it"]
 
     await client.say(f"{random.choice(answers)}, {context.message.author.mention}")
+
+@client.command(name='pp',
+                description="Link to pokemon-planet",
+                brief="Pokemon-planet",
+                pass_context=True)
+async def poke_planet(context):
+    await client.say("http://pokemon-planet.com/gameFullscreen.php")
+
+@client.command(name="dex",
+                description="Gives details about a specified pokemon",
+                brief="What this pokemon be",
+                pass_context=True)
+async def pokedex(context, args):
+    return
+
 try:
     client.run(TOKEN)
 except ConnectionResetError as e:
