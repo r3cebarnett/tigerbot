@@ -150,10 +150,11 @@ async def eight_ball(context):
 async def poke_planet(context):
     await client.say("http://pokemon-planet.com/gameFullscreen.php")
 
-@client.command(name="dex",
+@client.command(name="pdex",
                 description="Gives details about a specified pokemon",
                 brief="What this pokemon be",
-                pass_context=True)
+                pass_context=True,
+                aliases=['dex', 'pokedex', 'pokemon', 'poke'])
 async def pokedex(context, *args):
     hex_colors = {
         "black": 0x000000,
@@ -239,6 +240,35 @@ async def pokedex(context, *args):
         embed.add_field(name = pretty_stat[i.stat.name], value=i.base_stat, inline=True)
 
     await client.say(embed=embed)
+
+@client.command(name="pnat",
+                description="Gives details about a specified pokemon",
+                brief="What this pokemon be",
+                pass_context=True,
+                aliases=["nature", "nat"])
+async def nature(context, *args):
+    pretty_stat = {
+        'hp': 'HP',
+        'attack': 'Attack',
+        'defense': 'Defense',
+        'special-attack': 'Special Attack',
+        'special-defense': 'Special Defense',
+        'speed': 'Speed'
+    }
+
+    query = ''.join(args).lower()
+
+    try:
+        nature = pb.nature(query)
+    except ValueError as e:
+        await client.say(f"Sorry, {context.message.author.mention}, {query} was not found.")
+        return
+
+    msg = f"{nature.name.capitalize()}"
+    msg += f", +10% {pretty_stat[nature.increased_stat.name]}"
+    msg += f", -10% {pretty_stat[nature.decreased_stat.name]}"
+
+    await client.say(msg)
 
 try:
     client.run(TOKEN)
