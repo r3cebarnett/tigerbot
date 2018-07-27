@@ -4,9 +4,11 @@ import configparser
 import pokebase as pb
 import discord
 
+import sys, traceback
+
 from Imgur import Imgur
 from hearthstone import Hearthstone
-from discord.ext.commands import Bot
+from discord.ext import commands
 from os import listdir
 from os.path import isfile, join
 
@@ -18,13 +20,22 @@ TOKEN = config.get('bot', 'token')
 TRIG_PATH = config.get('pictures', 'triggered')
 FLIP_PATH = config.get('pictures', 'flip')
 
-client = Bot(command_prefix=BOT_PREFIX, pm_help=True)
+client = commands.Bot(command_prefix=BOT_PREFIX, pm_help=True)
 
 IMGUR = Imgur()
 HS = Hearthstone()
 random.seed()
 
 trig_files = [f for f in listdir(TRIG_PATH) if isfile(join(TRIG_PATH, f))]
+
+ext = ['owner', 'pokemon']
+if __name__ == '__main__':
+    for i in ext:
+        try:
+            client.load_extension(i)
+        except Exception as e:
+            print(f"Failed to load extension {i}.", file=sys.stderr)
+            traceback.print_exc()
 
 @client.event
 async def on_ready():
@@ -143,134 +154,7 @@ async def eight_ball(context):
 
     await client.say(f"{random.choice(answers)}, {context.message.author.mention}")
 
-@client.command(name='pp',
-                description="Link to pokemon-planet",
-                brief="Pokemon-planet",
-                pass_context=True)
-async def poke_planet(context):
-    await client.say("http://pokemon-planet.com/gameFullscreen.php")
-
-@client.command(name="pdex",
-                description="Gives details about a specified pokemon",
-                brief="What this pokemon be",
-                pass_context=True,
-                aliases=['dex', 'pokedex', 'pokemon', 'poke'])
-async def pokedex(context, *args):
-    hex_colors = {
-        "black": 0x000000,
-        "blue": 0x0000ff,
-        "brown": 0xa52a2a,
-        "gray": 0xbebebe,
-        "green": 0x00ff00,
-        "pink": 0xff69b4,
-        "purple": 0x9b30ff,
-        "red": 0xff0000,
-        "white": 0xffffff,
-        "yellow": 0xffff00
-    }
-
-    pretty_stat = {
-        'hp': 'HP',
-        'attack': 'Attack',
-        'defense': 'Defense',
-        'special-attack': 'Special Attack',
-        'special-defense': 'Special Defense',
-        'speed': 'Speed'
-    }
-
-    query = ''.join(args).lower()
-
-    try:
-        poke = pb.pokemon(query)
-    except ValueError as e:
-        await client.say(f"Sorry, {context.message.author.mention}, {query} was not found.")
-        return
-
-    name = poke.name.capitalize()
-    spec = pb.pokemon_species(poke.id)
-    color = hex_colors[spec.color.name]
-    stats = poke.stats
-    ico_url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
-    stats.reverse()
-
-    #Find flavor text
-    big_flav = spec.flavor_text_entries
-    flav = "No suitable flavor text found."
-
-    for i in big_flav:
-        if i.language.name == "en":
-            flav = i.flavor_text
-            break
-
-    embed = discord.Embed(colour=discord.Colour(color), description=flav)
-
-    embed.set_thumbnail(url=poke.sprites.front_default)
-    embed.set_author(name=f"{poke.name.capitalize()}, Pokémon #{poke.id}", url="https://pokeapi.co", icon_url=ico_url)
-    embed.set_footer(text="All information is sourced from https://pokeapi.co/", icon_url=ico_url)
-
-    #Add type
-    types = []
-
-    for i in poke.types:
-        types.append(f"**{i.type.name.capitalize()}**")
-
-    type_text = '/'.join(types)
-    embed.add_field(name="Type", value=type_text, inline=False)
-
-    embed.add_field(name="\u200b", value="\u200b", inline=False)
-
-    #Add effort values
-    evs = {}
-    for i in stats:
-        if i.effort > 0:
-            evs[i.stat.name] = i.effort
-
-    ev_text = []
-
-    for i in list(evs.keys()):
-        ev_text.append(f"**{pretty_stat[i]}**\t\t\t{evs[i]}")
-
-    ev_text = '\n'.join(ev_text)
-    embed.add_field(name="Effort Values", value=ev_text, inline=False)
-
-    embed.add_field(name="\u200b", value="\u200b", inline=False)
-
-    # Add stat fields
-    for i in stats:
-        embed.add_field(name = pretty_stat[i.stat.name], value=i.base_stat, inline=True)
-
-    await client.say(embed=embed)
-
-@client.command(name="pnat",
-                description="Gives details about a specified pokemon",
-                brief="What this pokemon be",
-                pass_context=True,
-                aliases=["nature", "nat"])
-async def nature(context, *args):
-    pretty_stat = {
-        'hp': 'HP',
-        'attack': 'Attack',
-        'defense': 'Defense',
-        'special-attack': 'Special Attack',
-        'special-defense': 'Special Defense',
-        'speed': 'Speed'
-    }
-
-    query = ''.join(args).lower()
-
-    try:
-        nature = pb.nature(query)
-    except ValueError as e:
-        await client.say(f"Sorry, {context.message.author.mention}, {query} was not found.")
-        return
-
-    msg = f"{nature.name.capitalize()}"
-    msg += f", +10% {pretty_stat[nature.increased_stat.name]}"
-    msg += f", -10% {pretty_stat[nature.decreased_stat.name]}"
-
-    await client.say(msg)
-
 try:
-    client.run(TOKEN)
+    client.run(TOKEN, bot=True, reconnect=True)
 except ConnectionResetError as e:
     client.logout()
