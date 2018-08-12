@@ -123,5 +123,52 @@ class PokemonCog:
 
         await self.bot.say(msg)
 
+    @commands.command(name="ptype",
+                    description="Gives strengths and weaknesses of a pokemon",
+                    brief="Whats a pokemon strong against?",
+                    pass_context=True,
+                    aliases=['type'])
+    async def poketype(self, ctx, *args):
+        query = ''.join(args).lower()
+
+        try:
+            poke = pb.pokemon(query)
+        except ValueError as e:
+            await self.bot.say(f"Sorry, {ctx.message.author.mention}, {query} was not found.")
+            return
+
+        name = poke.name.capitalize()
+        rawTypes = poke.types
+
+        typeVals = {}
+        noDamage = []
+
+        for i in rawTypes:
+            typeName = i.type.name
+            pokeType = pb.type_(typeName)
+            rawDamage = pokeType.damage_relations
+            rawNo = rawDamage.no_damage_from
+            rawHalf = rawDamage.half_damage_from
+            rawDoub = rawDamage.double_damage_from
+
+            if len(rawNo) > 0:
+                for j in rawNo:
+                    if j.name not in noDamage:
+                        noDamage.append(j.name)
+
+            if len(rawHalf) > 0:
+                for j in rawHalf:
+                    if j.name not in typeVals.keys():
+                        typeVals[j.name] = -1
+                    else:
+                        typeVals[j.name] -= 1
+
+            if len(rawDoub) > 0:
+                for j in rawDoub:
+                    if j.name not in typeVals.keys():
+                        typeVals[j.name] = 1
+                    else:
+                        typeVals[j.name] += 1
+
 def setup(bot):
     bot.add_cog(PokemonCog(bot))
