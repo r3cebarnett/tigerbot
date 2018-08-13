@@ -186,6 +186,9 @@ class PokemonCog:
             elif i == -2:
                 negneg.append(i.capitalize())
 
+        spec = pb.pokemon_species(poke.id)
+        color = self.hex_colors[spec.color.name]
+
         embed = discord.Embed(colour=discord.Colour(color))
 
         embed.set_thumbnail(url=poke.sprites.front_default)
