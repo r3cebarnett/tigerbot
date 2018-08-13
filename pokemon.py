@@ -188,6 +188,7 @@ class PokemonCog:
 
         spec = pb.pokemon_species(poke.id)
         color = self.hex_colors[spec.color.name]
+        ico_url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
 
         embed = discord.Embed(colour=discord.Colour(color))
 
