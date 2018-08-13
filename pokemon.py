@@ -153,22 +153,22 @@ class PokemonCog:
 
             if len(rawNo) > 0:
                 for j in rawNo:
-                    if j.name not in noDamage:
-                        noDamage.append(j.name)
+                    if j['name'] not in noDamage:
+                        noDamage.append(j['name'])
 
             if len(rawHalf) > 0:
                 for j in rawHalf:
-                    if j.name not in typeVals.keys():
-                        typeVals[j.name] = -1
+                    if j['name'] not in typeVals.keys():
+                        typeVals[j['name']] = -1
                     else:
-                        typeVals[j.name] -= 1
+                        typeVals[j['name']] -= 1
 
             if len(rawDoub) > 0:
                 for j in rawDoub:
-                    if j.name not in typeVals.keys():
-                        typeVals[j.name] = 1
+                    if j['name'] not in typeVals.keys():
+                        typeVals[j['name']] = 1
                     else:
-                        typeVals[j.name] += 1
+                        typeVals[j['name']] += 1
 
         dubdub = []
         dub = []
