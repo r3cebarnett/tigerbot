@@ -154,7 +154,7 @@ class PokemonCog:
             if len(rawNo) > 0:
                 for j in rawNo:
                     if j['name'] not in noDamage:
-                        noDamage.append(j['name'])
+                        noDamage.append(j['name'].capitalize())
 
             if len(rawHalf) > 0:
                 for j in rawHalf:
@@ -177,13 +177,13 @@ class PokemonCog:
 
         for i in list(typeVals.keys()):
             tempVal = typeVals[i]
-            if i == 2:
+            if tempVal == 2:
                 dubdub.append(i.capitalize())
-            elif i == 1:
+            elif tempVal == 1:
                 dub.append(i.capitalize())
-            elif i == -1:
+            elif tempVal == -1:
                 neg.append(i.capitalize())
-            elif i == -2:
+            elif tempVal == -2:
                 negneg.append(i.capitalize())
 
         spec = pb.pokemon_species(poke.id)
@@ -197,13 +197,15 @@ class PokemonCog:
         embed.set_footer(text="All information is sourced from https://pokeapi.co/", icon_url=ico_url)
 
         if len(dubdub) > 0:
-            embed.add_field(name="4x Damage", value=' '.join(dubdub), inline=False)
+            embed.add_field(name="4x Damage", value=', '.join(dubdub), inline=False)
         if len(dub) > 0:
-            embed.add_field(name="2x Damage", value=' '.join(dub), inline=False)
+            embed.add_field(name="2x Damage", value=', '.join(dub), inline=False)
         if len(neg) > 0:
-            embed.add_field(name=".5x Damage", value=' '.join(neg), inline=False)
+            embed.add_field(name=".5x Damage", value=', '.join(neg), inline=False)
         if len(negneg) > 0:
-            embed.add_field(name=".25x Damage", value=' '.join(negneg), inline=False)
+            embed.add_field(name=".25x Damage", value=', '.join(negneg), inline=False)
+        if len(noDamage) > 0:
+            embed.add_field(name="No Damage", value=', '.join(noDamage), inline=False)
 
         await self.bot.say(embed=embed)
 
